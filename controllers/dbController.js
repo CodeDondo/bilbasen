@@ -3,7 +3,7 @@ import express from 'express';
 import dbConfig from '../config/dbConfig.js';
 
 // Importerer de modeller der skal oprettes
-import carModel from '../models/carModel.js';
+import {carModel} from '../models/carModel.js';
 
 // Opretter en router
 export const dbController = express.Router();

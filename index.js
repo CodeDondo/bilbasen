@@ -1,43 +1,27 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import dbConfig from './config/dbConfig.js';
-import { carController } from '../controllers/carController.js';
+import {carModel} from './models/carModel.js';
+import { dbController } from './controllers/dbController.js';
+import { carController } from './controllers/carController.js';
 dotenv.config();
-
-console.log(process.env);
 
 
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const port = process.env.PORT || 4000;
+
+
+app.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome'
+    });
+});
 
 // Tilføjer controller som middleware
-app.use(carController);
+app.use( carController, dbController);
 
-// Starter serveren
-app.listen(4242, () => {
-  console.log(`Server kører på adressen http://localhost:4242`);
-});
-
-// app.get('/', (req, res) => {
-//     res.json({
-//         message: 'Velkommen'
-//     });
-
-// });
-
-app.get('/test', async (req, res) => {
-    res.send('Velkommen til bilbasen')
-});
-
-app.get('/sync', async (req, res) => {
-    try {
-      const resp = await sequelize.sync();
-      res.send('Data successfully synchronized');
-    }
-    catch(err) {
-      res.send(err);
-    }
-  });
 
 app.get('*', (req, res) => {
     res.json({

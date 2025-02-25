@@ -7,7 +7,12 @@ export const carController = express.Router();
 
 // READ: Route til at hente liste
 carController.get('/cars', async (req, res) => {
-  carModel.findAll()
+try { 
+  const result = await carModel.findAll()
+  res.send(result)
+} catch (error) {
+  res.send(`Error: ${error} `)
+} 
 });
 
 // READ: Route til at hente detaljer
@@ -17,7 +22,13 @@ carController.get('/cars/:id([0-9]*)', async (req, res) => {
 
 // CREATE: Route til at oprette
 carController.post('/cars', async (req, res) => {
-  carModel.create()
+  try {
+    const result = await carModel.create(req.body)
+    res.send(result)
+  } catch (error) {
+    res.send(`Error: ${error} `)
+  }
+  
 });
 
 // UPDATE: Route til at opdatere
