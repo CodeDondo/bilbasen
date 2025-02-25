@@ -1,4 +1,4 @@
-import dbConfig from '../Config/dbConfig.js';
+import dbConfig from './Config/dbConfig.js';
 import { DataTypes, Model } from 'sequelize';
 
 export class carModel extends Model {}
