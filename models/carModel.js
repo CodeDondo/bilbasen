@@ -18,7 +18,12 @@ carModel.init({
       year: {
         type: DataTypes.DATE,
         allowNull: false
-      }
+      },
+
+      categories: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     }, {
         sequelize: dbConfig,
         modelName: 'car', // Modellens navn
