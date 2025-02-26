@@ -20,10 +20,10 @@ carModel.init({
         allowNull: false
       },
 
-      categories: {
+      category: {
         type: DataTypes.STRING,
         allowNull: false
-      },
+      }
     }, {
         sequelize: dbConfig,
         modelName: 'car', // Modellens navn
