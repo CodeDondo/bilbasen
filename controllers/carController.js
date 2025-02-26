@@ -10,6 +10,11 @@ carController.get('/cars', async (req, res) => {
 try { 
   const result = await carModel.findAll()
   res.send(result)
+
+if(!data || data.length === 0) {
+  res.json('No data found')
+}
+
 } catch (error) {
   res.send(`Error: ${error} `)
 } 
@@ -17,7 +22,24 @@ try {
 
 // READ: Route til at hente detaljer
 carController.get('/cars/:id([0-9]*)', async (req, res) => {
-  carModel.findOne()
+  try {
+    const id = parseInt(req.params.id, 10);
+
+    let result = await carModel.findOne({
+      where: { id: id}
+    });
+
+    if (!result) {
+      return res.status(404).json({ message: "Bil ikke fundet"});
+    }
+    
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      message: `Fejl i kald af carModel: ${error.message}`
+    });
+  }
+
 });
 
 // CREATE: Route til at oprette
