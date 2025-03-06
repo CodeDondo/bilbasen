@@ -10,10 +10,13 @@ carModel.init({
         primaryKey: true
       },
     
-      brand: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
+      brand_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: brandModel,
+          key: 'id'
+        }},
     
       year: {
         type: DataTypes.DATE,
