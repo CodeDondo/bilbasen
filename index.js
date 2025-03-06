@@ -4,7 +4,9 @@ import dbConfig from './config/dbConfig.js';
 import {carModel} from './models/carModel.js';
 import { dbController } from './controllers/dbController.js';
 import { carController } from './controllers/carController.js';
+import { setRelations } from './models/relations.js';
 dotenv.config();
+setRelations();
 
 
 const app = express();
